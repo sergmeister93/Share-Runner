@@ -13,6 +13,7 @@
     "check:level": "esbuild src/systems/levelWorld.check.ts --bundle --format=esm --platform=node --outfile=node_modules/.cache/sr-level.mjs && node node_modules/.cache/sr-level.mjs",
     "check:player": "esbuild src/systems/playerController.check.ts --bundle --format=esm --platform=node --outfile=node_modules/.cache/sr-player.mjs && node node_modules/.cache/sr-player.mjs",
     "check:platforms": "esbuild src/systems/platforms.check.ts --bundle --format=esm --platform=node --outfile=node_modules/.cache/sr-platforms.mjs && node node_modules/.cache/sr-platforms.mjs",
+    "check:coins": "esbuild src/systems/collectibles.check.ts --bundle --format=esm --platform=node --outfile=node_modules/.cache/sr-coins.mjs && node node_modules/.cache/sr-coins.mjs",
     "comms:validate": "node comms/bin/validate.mjs",
     "assets:validate": "node scripts/validate-baltimore-assets.mjs",
     "assets:preview": "node scripts/generate-baltimore-preview.mjs",

@@ -26,6 +26,13 @@ export type LoadInstruction =
     }
   | { kind: 'audio'; key: string; url: string; loop: boolean };
 
+/** Single-image prefab metadata (key + dims) pulled from its manifest, never hardcoded. */
+export interface PrefabMeta {
+  key: string;
+  width: number;
+  height: number;
+}
+
 /** Player frame/pivot/collision pulled straight from the sprite manifest (no hardcoding). */
 export interface PlayerMeta {
   assetId: string;
@@ -70,12 +77,20 @@ export class AssetCatalog {
   readonly loadList: LoadInstruction[];
   readonly placements: AuthoredGameplayPlacements;
   readonly playerMeta: PlayerMeta;
+  /** Share-coin texture key + dims (collectables manifest). */
+  readonly shareMeta: PrefabMeta;
   private readonly byKey: Map<string, LoadInstruction>;
 
-  constructor(loadList: LoadInstruction[], placements: AuthoredGameplayPlacements, playerMeta: PlayerMeta) {
+  constructor(
+    loadList: LoadInstruction[],
+    placements: AuthoredGameplayPlacements,
+    playerMeta: PlayerMeta,
+    shareMeta: PrefabMeta,
+  ) {
     this.loadList = loadList;
     this.placements = placements;
     this.playerMeta = playerMeta;
+    this.shareMeta = shareMeta;
     this.byKey = new Map(loadList.map((i) => [i.key, i]));
   }
 
@@ -189,7 +204,16 @@ export function buildAssetCatalog(bundle: ManifestBundle): AssetCatalog {
     },
   };
 
-  return new AssetCatalog(loads, placements, playerMeta);
+  // Share-coin texture key + dims from the collectables manifest (its single asset).
+  const shareSrc = 'collectables/manifest.json';
+  const shareEntry = Object.values(req(bundle.collectables.assets, 'assets', shareSrc))[0];
+  const shareMeta: PrefabMeta = {
+    key: req(shareEntry?.key, 'assets.<share>.key', shareSrc),
+    width: req(shareEntry?.width, 'assets.<share>.width', shareSrc),
+    height: req(shareEntry?.height, 'assets.<share>.height', shareSrc),
+  };
+
+  return new AssetCatalog(loads, placements, playerMeta, shareMeta);
 }
 
 /** Queue every catalog asset onto a Phaser scene loader. Called by the Preloader (WO-06). */
