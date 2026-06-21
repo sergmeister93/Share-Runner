@@ -29,6 +29,13 @@
       "loopSuggested": true
     }
   },
+  "sfx": {
+    "sfx-jump": { "file": "audio/sfx/jump.wav", "format": "wav" },
+    "sfx-land": { "file": "audio/sfx/land.wav", "format": "wav" },
+    "sfx-collect": { "file": "audio/sfx/collect.wav", "format": "wav" },
+    "sfx-complete": { "file": "audio/sfx/complete.wav", "format": "wav" },
+    "sfx-locked": { "file": "audio/sfx/locked.wav", "format": "wav" }
+  },
   "regeneration": {
     "runtimeAssets": "../scripts/refresh-baltimore-assets.mjs",
     "scalePreview": "../scripts/generate-baltimore-preview.mjs",

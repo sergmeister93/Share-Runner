@@ -63,7 +63,7 @@ const images = catalog.loadList.filter((i) => i.kind === 'image');
 const audio = catalog.loadList.filter((i) => i.kind === 'audio');
 assertEqual(sheets.length, 6, '6 player animation spritesheets');
 assertEqual(images.length, 4, '4 images (background, rowhomes, share, bricks)');
-assertEqual(audio.length, 1, '1 audio track');
+assertEqual(audio.length, 6, '6 audio (1 music + 5 sfx)');
 
 const idle = catalog.getSpritesheet('male_hero_trp_blue-idle');
 assertEqual(idle.frameWidth, 160, 'player frame width 160 (manifest)');
@@ -74,6 +74,9 @@ assertEqual(catalog.getImage('floating-bricks').width, 170, 'brick width 170 (ma
 const theme = catalog.getAudio('baltimore-rooftop-theme');
 assertEqual(theme.loop, true, 'music loops (loopSuggested)');
 assert(theme.url.endsWith('.mp3'), 'music url resolves to the mp3');
+const jumpSfx = catalog.getAudio('sfx-jump');
+assertEqual(jumpSfx.loop, false, 'sfx never loops');
+assert(jumpSfx.url.endsWith('/assets/audio/sfx/jump.wav'), 'sfx url resolves under /assets');
 
 // --- Manifest discipline: a missing required field must throw, naming the key ----
 function expectThrow(mutate: (b: ManifestBundle) => void, mustMention: string): void {

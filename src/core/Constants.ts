@@ -11,6 +11,14 @@
 export const LEVEL_ID = 'baltimore-waterfront' as const;
 /** Music asset key (manifest), unrelated to the level id. */
 export const LEVEL_MUSIC_KEY = 'baltimore-rooftop-theme' as const;
+/** SFX asset keys (manifest `sfx` block). Paths live in the manifest, not here. */
+export const SFX_KEYS = {
+  jump: 'sfx-jump',
+  land: 'sfx-land',
+  collect: 'sfx-collect',
+  complete: 'sfx-complete',
+  locked: 'sfx-locked',
+} as const;
 
 // --- Canonical world facts (repo facts; verified against level contract) ---------
 export const WORLD_WIDTH = 4400;
@@ -46,6 +54,7 @@ export const COIN_BOB_AMPLITUDE_PX = 8; // [TUNABLE]
 export const COIN_BOB_DURATION_MS = 900; // [TUNABLE]
 export const CAMERA_PAN_DURATION_MS = 1200; // [TUNABLE]
 export const MUSIC_VOLUME = 0.55; // [TUNABLE]
+export const SFX_VOLUME = 0.4; // [TUNABLE]
 
 // Provisional physics (reconcile note; [TUNABLE] — finalized after playtest, E-07).
 export const GRAVITY_Y = 3000; // [TUNABLE]

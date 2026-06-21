@@ -17,6 +17,7 @@ import { CollectibleSystem } from '../systems/CollectibleSystem';
 import { CompletionSystem } from '../systems/CompletionSystem';
 import { CameraSystem } from '../systems/CameraSystem';
 import { AudioController } from '../ui/AudioController';
+import { SfxController } from '../ui/SfxController';
 import { createMuteToggle } from '../ui/MuteToggle';
 import { HUD } from '../ui/HUD';
 
@@ -41,6 +42,7 @@ export class LevelScene extends Phaser.Scene {
   private coins!: CollectibleSystem;
   private completion!: CompletionSystem;
   private audio!: AudioController;
+  private sfx!: SfxController;
   private completing = false;
   private readonly onComplete = (): void => this.onLevelComplete();
 
@@ -72,6 +74,7 @@ export class LevelScene extends Phaser.Scene {
     this.completion.registerOverlap(this.player);
 
     this.audio = new AudioController(this, catalog);
+    this.sfx = new SfxController(this, catalog);
     const mute = createMuteToggle(this, this.audio);
     const hud = new HUD(this);
 
