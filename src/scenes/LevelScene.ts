@@ -75,6 +75,11 @@ export class LevelScene extends Phaser.Scene {
     const camera = new CameraSystem(this);
     camera.contain();
     camera.follow(this.player);
+    // WO-18 QA: at whole-world contain-fit the player is ~23px wide (barely playable).
+    // Zoom in and let the camera follow for a readable side-scroll. Bounds (=world) keep
+    // it from showing past the edges. ponytail: a literal here; promote to Constants if
+    // we ever add a second level.
+    this.cameras.main.setZoom(2.5);
 
     gameState.currentScene = SCENE_LEVEL;
     gameState.isRunActive = true;
