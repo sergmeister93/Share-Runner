@@ -79,6 +79,8 @@ export class AssetCatalog {
   readonly playerMeta: PlayerMeta;
   /** Share-coin texture key + dims (collectables manifest). */
   readonly shareMeta: PrefabMeta;
+  /** Finish-flag texture key + dims (environments manifest goal-marker). */
+  readonly flagMeta: PrefabMeta;
   private readonly byKey: Map<string, LoadInstruction>;
 
   constructor(
@@ -86,11 +88,13 @@ export class AssetCatalog {
     placements: AuthoredGameplayPlacements,
     playerMeta: PlayerMeta,
     shareMeta: PrefabMeta,
+    flagMeta: PrefabMeta,
   ) {
     this.loadList = loadList;
     this.placements = placements;
     this.playerMeta = playerMeta;
     this.shareMeta = shareMeta;
+    this.flagMeta = flagMeta;
     this.byKey = new Map(loadList.map((i) => [i.key, i]));
   }
 
@@ -224,7 +228,18 @@ export function buildAssetCatalog(bundle: ManifestBundle): AssetCatalog {
     height: req(shareEntry?.height, 'assets.<share>.height', shareSrc),
   };
 
-  return new AssetCatalog(loads, placements, playerMeta, shareMeta);
+  // Finish-flag texture key + dims from the environment manifest (goal-marker prefab).
+  const envSrc = 'environments/manifest.json';
+  const flagEntry = Object.values(req(bundle.environment.assets, 'assets', envSrc)).find(
+    (a) => a.key === 'finish-flag',
+  );
+  const flagMeta: PrefabMeta = {
+    key: req(flagEntry?.key, 'assets.<finish-flag>.key', envSrc),
+    width: req(flagEntry?.width, 'assets.<finish-flag>.width', envSrc),
+    height: req(flagEntry?.height, 'assets.<finish-flag>.height', envSrc),
+  };
+
+  return new AssetCatalog(loads, placements, playerMeta, shareMeta, flagMeta);
 }
 
 /** Queue every catalog asset onto a Phaser scene loader. Called by the Preloader (WO-06). */

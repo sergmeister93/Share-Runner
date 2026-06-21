@@ -51,6 +51,7 @@ await dimensions(4400, 2200, "assets", "levels", "baltimore", "generated", "balt
 await dimensions(2200, 589, "assets", "levels", "baltimore", "generated", "baltimore_rowhome_platform_strip.png");
 await dimensions(56, 55, "assets", "sprites", "collectables", "shares.png");
 await dimensions(170, 58, "assets", "sprites", "environments", "platforms.png");
+await dimensions(301, 861, "assets", "sprites", "environments", "flag.png");
 
 const heroAnimations = { idle: 10, walk: 10, run: 10, jump: 6, fall: 4, "fall-loop": 3 };
 for (const [name, frames] of Object.entries(heroAnimations)) {
@@ -105,6 +106,7 @@ check(collectables.assets.share.width === 56 && collectables.assets.share.height
 check(collectables.assets.share.placementStatus === "unassigned", "share placement must remain unassigned");
 check(environment.assets.floatingBricks.width === 170 && environment.assets.floatingBricks.height === 58, "platform manifest mismatch");
 check(environment.assets.floatingBricks.placementStatus === "unassigned", "platform placement must remain unassigned");
+check(environment.assets.finishFlag.width === 301 && environment.assets.finishFlag.height === 861, "flag manifest mismatch");
 check(library.canonicalCoordinateSpace.width === 4400, "library index canonical width mismatch");
 check(library.canonicalCoordinateSpace.height === 2494, "library index canonical height mismatch");
 
@@ -119,6 +121,7 @@ for (const source of [
   ["assets", "levels", "baltimore", "source", "baltimore_rowhome_platform_strip_source.png"],
   ["assets", "sprites", "collectables", "source", "shares_source.png"],
   ["assets", "sprites", "environments", "source", "platforms_source.png"],
+  ["assets", "sprites", "environments", "source", "pngfind.com-red-flag-png-225467.png"],
 ]) {
   try {
     await access(at(...source));
