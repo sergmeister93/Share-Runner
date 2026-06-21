@@ -8,9 +8,8 @@ import { CompletionScene } from './scenes/CompletionScene';
 /**
  * App entry (Manager seam). Final scene graph for the first playable:
  * Intro → Menu → Preloader → Level → Completion. IntroScene is first, so it
- * auto-starts. LevelLoadStubScene (WO-06) is retired by the WO-16 integration —
- * the real LevelScene now owns the SCENE_LEVEL key. app:boot announces that
- * Phaser + the shared singletons are live (event_bus_contract §4.1).
+ * auto-starts. app:boot announces that Phaser + the shared singletons are live
+ * (event_bus_contract §4.1).
  */
 new Phaser.Game(
   createGameConfig([IntroScene, MenuScene, PreloaderScene, LevelScene, CompletionScene]),
