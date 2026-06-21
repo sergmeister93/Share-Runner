@@ -1,12 +1,5 @@
 import Phaser from 'phaser';
-
-/**
- * Canonical authored space for baltimore-waterfront (frozen level contract).
- * World is 4400×2494, origin top-left. WO-04 will own the Constants singleton;
- * these literals live here only because the Scale Manager needs them at boot.
- */
-const WORLD_WIDTH = 4400;
-const WORLD_HEIGHT = 2494;
+import { WORLD_WIDTH, WORLD_HEIGHT } from './Constants';
 
 /** Phaser game config for the app shell. Pixel-art crisp, contain-fit, no gameplay. */
 export function createGameConfig(

@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { createGameConfig } from './core/PhaserGameConfig';
+import { eventBus } from './core/EventBus';
 
 /**
  * Boot stub for the app shell (WO-03). The real scenes — Intro, Menu, Preloader,
@@ -21,8 +22,8 @@ class BootScene extends Phaser.Scene {
       })
       .setOrigin(0.5);
 
-    // TODO(WO-04): emit EventBus `app:boot { timestampMs }` once the singleton exists.
-    // Do not invent an EventBus here — WO-04 owns it.
+    // Singletons are available now; announce boot (event_bus_contract §4.1).
+    eventBus.emit('app:boot', { timestampMs: Date.now() });
   }
 }
 

@@ -8,6 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "typecheck": "tsc --noEmit",
+    "check:core": "esbuild src/core/selfcheck.ts --bundle --format=esm --platform=node --outfile=node_modules/.cache/sr-selfcheck.mjs && node node_modules/.cache/sr-selfcheck.mjs",
     "comms:validate": "node comms/bin/validate.mjs",
     "assets:validate": "node scripts/validate-baltimore-assets.mjs",
     "assets:preview": "node scripts/generate-baltimore-preview.mjs",
