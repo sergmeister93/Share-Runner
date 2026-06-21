@@ -102,7 +102,7 @@ export class HUD {
   destroy(): void {
     if (this.destroyed) return;
     this.destroyed = true;
-    this.cancelAnimations();
+    this.cancelAnimations(false);
     eventBus.off('score:changed', this.onScoreChanged);
     eventBus.off('share:collected', this.onShareCollected);
     eventBus.off('hud:share-counter-pulse', this.onCounterPulse);
@@ -202,7 +202,7 @@ export class HUD {
     });
   }
 
-  private cancelAnimations(): void {
+  private cancelAnimations(resetCosmetics = true): void {
     this.pulseTimer?.remove(false);
     this.feedbackTimer?.remove(false);
     this.flashTimer?.remove(false);
@@ -211,11 +211,13 @@ export class HUD {
     this.feedbackTimer = undefined;
     this.flashTimer = undefined;
     this.flashTween = undefined;
+    gameState.ui.scoreFlashActive = false;
+    if (!resetCosmetics) return;
+
     this.drawCounter(false);
     this.counterText.setColor('#e8fbff');
     this.collectionFeedback.setVisible(false);
     this.flashRoot.setAlpha(1).setVisible(false);
-    gameState.ui.scoreFlashActive = false;
   }
 }
 
