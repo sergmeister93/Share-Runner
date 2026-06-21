@@ -20,6 +20,15 @@
         "collisionType": "solid"
       },
       "placementStatus": "unassigned"
+    },
+    "finishFlag": {
+      "key": "finish-flag",
+      "file": "flag.png",
+      "width": 301,
+      "height": 861,
+      "alpha": true,
+      "origin": { "x": 0.5, "y": 1 },
+      "placementStatus": "assigned"
     }
   },
   "source": { "file": "source/platforms_source.png", "runtime": false }

@@ -14,7 +14,7 @@ export class CompletionSystem {
   private readonly tracker = new CompletionTracker();
 
   constructor(scene: Phaser.Scene, catalog: AssetCatalog) {
-    this.flag = new Flag(scene, catalog.placements.flag);
+    this.flag = new Flag(scene, catalog.placements.flag, catalog.flagMeta);
   }
 
   /** Player overlap -> evaluate the win condition (locked feedback or completion). */

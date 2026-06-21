@@ -62,7 +62,7 @@ const sheets = catalog.loadList.filter((i) => i.kind === 'spritesheet');
 const images = catalog.loadList.filter((i) => i.kind === 'image');
 const audio = catalog.loadList.filter((i) => i.kind === 'audio');
 assertEqual(sheets.length, 6, '6 player animation spritesheets');
-assertEqual(images.length, 4, '4 images (background, rowhomes, share, bricks)');
+assertEqual(images.length, 5, '5 images (background, rowhomes, share, bricks, flag)');
 assertEqual(audio.length, 6, '6 audio (1 music + 5 sfx)');
 
 const idle = catalog.getSpritesheet('male_hero_trp_blue-idle');
@@ -71,6 +71,11 @@ assertEqual(idle.frameHeight, 160, 'player frame height 160 (manifest)');
 assertEqual(idle.frameCount, 10, 'idle 10 frames (manifest)');
 assertEqual(catalog.getImage('share').width, 56, 'share width 56 (manifest)');
 assertEqual(catalog.getImage('floating-bricks').width, 170, 'brick width 170 (manifest)');
+assertEqual(catalog.getImage('finish-flag').height, 861, 'flag height 861 (manifest)');
+assert(
+  catalog.flagMeta.key === 'finish-flag' && catalog.flagMeta.width === 301,
+  'flag meta key+dims from catalog',
+);
 const theme = catalog.getAudio('baltimore-rooftop-theme');
 assertEqual(theme.loop, true, 'music loops (loopSuggested)');
 assert(theme.url.endsWith('.mp3'), 'music url resolves to the mp3');
