@@ -95,18 +95,23 @@ const inv = existsSync(at("docs/skills/SKILLS_AND_PLUGINS_INVENTORY.md"))
 if (!/(?:FOUND|NOT_FOUND|PENDING_MANUAL_INSTALL)/.test(inv))
   fail("Ponytail status (FOUND|NOT_FOUND|PENDING_MANUAL_INSTALL) not recorded in SKILLS_AND_PLUGINS_INVENTORY.md");
 
-// ---- 6) src/ has READMEs but no runtime impl files (unless pre-existing) ------
-const RUNTIME = new Set([".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".html", ".css"]);
-function scan(dir) {
-  if (!existsSync(dir)) return;
-  for (const e of readdirSync(dir)) {
-    const full = join(dir, e);
-    if (statSync(full).isDirectory()) scan(full);
-    else if (RUNTIME.has(extname(e).toLowerCase()))
-      fail(`runtime file present in src/ during setup pass: ${relative(ROOT, full)}`);
-  }
+// ---- 6) post-setup: the runtime app shell is implemented ---------------------
+// Setup mode forbade runtime code in src/. The Manager recorded a setup-completion
+// decision and the first playable shipped (Intro→Menu→Preloader→Level→Completion),
+// so this now REQUIRES the runtime entrypoints instead of forbidding them.
+const REQUIRED_RUNTIME = [
+  ["index.html"],
+  ["src", "main.ts"],
+  ["src", "core", "EventBus.ts"],
+  ["src", "core", "GameState.ts"],
+  ["src", "core", "Constants.ts"],
+  ["src", "scenes", "LevelScene.ts"],
+  ["src", "scenes", "CompletionScene.ts"],
+];
+for (const seg of REQUIRED_RUNTIME) {
+  if (!existsSync(at(...seg)))
+    fail(`expected runtime file missing (post-setup): ${seg.join("/")}`);
 }
-scan(at("src"));
 
 // ---- report ------------------------------------------------------------------
 if (fails.length) {
