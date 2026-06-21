@@ -1,1 +1,2 @@
 {"_schema":"roster-entry/v1","_doc":"append one JSON object per agent at launch; see schemas/roster-entry.md"}
+{"id":"manager-claude","role":"manager","vendor":"claude-code","capabilities":["orchestration","review","merge","contract-review","code-review","qa-verification","asset-manifest-read"],"ts":"2026-06-21T15:00:00Z","msg":"Manager session for WO-00 reconciliation"}

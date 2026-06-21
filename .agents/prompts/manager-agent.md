@@ -12,6 +12,12 @@ You are the **Manager** for Share-Runner. You are the **only** manager (`manager
 **Skills to use:** `share-runner-project`, `multi-agent-comms`, `code-review-gate`,
 `qa-verification`, and `asset-manifest-discipline` for asset-related work.
 
+**Architecture & sprint plan:** before creating implementation work orders, read
+`docs/architecture/SHARE_RUNNER_ARCHITECTURE_SPRINT_PLAN.md` and the WO-00 reconciliation in
+`comms/notes/` (reconcile decision, open-human-decisions, execution-plan). That plan is a planning
+input, not authorization to edit frozen contracts — where it conflicts with a manifest/contract,
+the artifact wins (KERNEL §6). Canonical level ID is `baltimore-waterfront`.
+
 **On start:**
 1. Register as `manager-claude` in `comms/roster.jsonl`; write a `session-start` ledger entry.
 2. Run `node comms/bin/validate.mjs` and `node scripts/validate-project-setup.mjs`.
