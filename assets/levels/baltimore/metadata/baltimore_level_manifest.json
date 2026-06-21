@@ -68,10 +68,38 @@
     "environment": "../../../sprites/environments/manifest.json"
   },
   "authoredGameplayPlacements": {
-    "collectables": [],
-    "environmentObstacles": [],
-    "status": "intentionally-unassigned",
-    "note": "The scale-test preview is not placement data. Author these arrays later."
+    "status": "authored-provisional",
+    "approval": "WO-02; human-approved E-08 via Manager launch; QA reachability gate WO-18",
+    "anchors": {
+      "playerSpawn": "bottom-center",
+      "flag": "bottom-center",
+      "platform": "top-left",
+      "movingPlatformBounds": "top-left",
+      "shareCoin": "center"
+    },
+    "ground": { "x": 0, "topY": 1905, "width": 4400 },
+    "playerSpawn": { "id": "player_spawn_01", "anchor": "bottom-center", "x": 220, "y": 1905 },
+    "flag": { "id": "flag_01", "anchor": "bottom-center", "x": 4230, "y": 1905 },
+    "environmentObstacles": [
+      { "id": "plat_s_01", "kind": "stationary", "topLeft": { "x": 520, "y": 1745 }, "brickCount": 2, "width": 340, "height": 58, "movement": null, "speed": 0 },
+      { "id": "plat_s_02", "kind": "stationary", "topLeft": { "x": 900, "y": 1620 }, "brickCount": 2, "width": 340, "height": 58, "movement": null, "speed": 0 },
+      { "id": "plat_v_01", "kind": "vertical", "topLeft": { "x": 1260, "y": 1690 }, "brickCount": 1, "width": 170, "height": 58, "movement": { "axis": "y", "min": 1490, "max": 1690 }, "speed": 55 },
+      { "id": "plat_s_03", "kind": "stationary", "topLeft": { "x": 1620, "y": 1480 }, "brickCount": 2, "width": 340, "height": 58, "movement": null, "speed": 0 },
+      { "id": "plat_h_01", "kind": "horizontal", "topLeft": { "x": 1980, "y": 1540 }, "brickCount": 1, "width": 170, "height": 58, "movement": { "axis": "x", "min": 1980, "max": 2300 }, "speed": 70 },
+      { "id": "plat_s_04", "kind": "stationary", "topLeft": { "x": 2460, "y": 1410 }, "brickCount": 3, "width": 510, "height": 58, "movement": null, "speed": 0 },
+      { "id": "plat_v_02", "kind": "vertical", "topLeft": { "x": 2920, "y": 1660 }, "brickCount": 1, "width": 170, "height": 58, "movement": { "axis": "y", "min": 1420, "max": 1660 }, "speed": 65 },
+      { "id": "plat_h_02", "kind": "horizontal", "topLeft": { "x": 3250, "y": 1520 }, "brickCount": 2, "width": 340, "height": 58, "movement": { "axis": "x", "min": 3250, "max": 3600 }, "speed": 80 },
+      { "id": "plat_s_05", "kind": "stationary", "topLeft": { "x": 3740, "y": 1390 }, "brickCount": 2, "width": 340, "height": 58, "movement": null, "speed": 0 },
+      { "id": "plat_s_06_final_drop", "kind": "stationary", "topLeft": { "x": 4050, "y": 1715 }, "brickCount": 2, "width": 340, "height": 58, "movement": null, "speed": 0 }
+    ],
+    "collectables": [
+      { "id": "share_01", "center": { "x": 690, "y": 1700 }, "anchorPlatformId": "plat_s_01", "behavior": "static-bob" },
+      { "id": "share_02", "center": { "x": 1345, "y": 1445 }, "anchorPlatformId": "plat_v_01", "behavior": "moves-with-platform" },
+      { "id": "share_03", "center": { "x": 2065, "y": 1495 }, "anchorPlatformId": "plat_h_01", "behavior": "moves-with-platform" },
+      { "id": "share_04", "center": { "x": 2715, "y": 1365 }, "anchorPlatformId": "plat_s_04", "behavior": "static-bob" },
+      { "id": "share_05", "center": { "x": 3340, "y": 1475 }, "anchorPlatformId": "plat_h_02", "behavior": "moves-with-platform" }
+    ],
+    "note": "§7 authored layout, anchors per E-01. Coin offsets above moving platforms (E-02). Provisional/tunable; runtime reads this block for placement, manifests for dimensions/paths."
   },
   "previews": {
     "goldComposition": {

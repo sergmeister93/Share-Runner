@@ -86,8 +86,11 @@ const environment = await json("assets", "sprites", "environments", "manifest.js
 const library = await json("assets", "asset_library_manifest.json");
 
 check(level.compositionSpace.width === 4400 && level.compositionSpace.height === 2494, "level composition dimensions mismatch");
-check(level.authoredGameplayPlacements.collectables.length === 0, "collectable placements must remain empty");
-check(level.authoredGameplayPlacements.environmentObstacles.length === 0, "environment placements must remain empty");
+check(level.authoredGameplayPlacements.status === "authored-provisional", "authored placements must be the WO-02 approved provisional layout");
+check(level.authoredGameplayPlacements.collectables.length === 5, "level must author exactly 5 share coins (WO-02)");
+check(new Set(level.authoredGameplayPlacements.collectables.map((c) => c.id)).size === 5, "share coin ids must be unique");
+check(level.authoredGameplayPlacements.environmentObstacles.length === 10, "level must author the 10 §7 platform instances (WO-02)");
+check(level.authoredGameplayPlacements.flag.x === 4230 && level.authoredGameplayPlacements.playerSpawn.x === 220, "spawn left / flag right anchors must match §7");
 check(composition.layers.length === 3, "gold composition must contain skyline plus two rowhome instances");
 check(composition.layers[1].x === 0 && composition.layers[2].x === 2200, "rowhome instances must meet at x=2200");
 check(composition.layers[1].y === 1905 && composition.layers[2].y === 1905, "rowhome instances must start at y=1905");

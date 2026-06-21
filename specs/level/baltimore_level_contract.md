@@ -54,8 +54,21 @@ bounds, and speed. None are authored yet.
 
 - Transition from title/menu to the player on the left, then side-scroll left→right.
 
-## Placement status
+## Authored placement (WO-02 — human-approved E-08, provisional)
 
-`authoredGameplayPlacements` (collectables, environmentObstacles) are **intentionally empty** in the
-manifest, and `spawnGuides` placements are empty. Authoring exact share-coin, platform, flag, and
-spawn placements is **future work** assigned by the Manager — do not invent placements here.
+The §7 layout is **authored** into `baltimore_level_manifest.json → authoredGameplayPlacements`
+(the machine-readable source runtime reads). Anchors per E-01: player/flag bottom-center, platform
+top-left, coin center. Status `authored-provisional` — tunable and QA reachability-gated (WO-18).
+
+- **Player spawn:** `player_spawn_01` at feet `x=220, y=1905` (left).
+- **Flag:** `flag_01` bottom-center `x=4230, y=1905` (right).
+- **Platforms (10):** 6 stationary, 2 vertical-moving (`plat_v_01` minY 1490/maxY 1690 @55px/s;
+  `plat_v_02` minY 1420/maxY 1660 @65px/s), 2 horizontal-moving (`plat_h_01` minX 1980/maxX 2300
+  @70px/s; `plat_h_02` minX 3250/maxX 3600 @80px/s). Brick asset 170×58, composed by `brickCount`.
+- **Share coins (5):** `share_01..05`, unique ids, collect-once. `share_02/03/05` move with their
+  anchor platform at a fixed offset above it (E-02); `share_01/04` static-bob.
+- Ground stays one static body (width 4400, top y=1905). All coords in canonical 4400×2494 space.
+
+The `composition.json spawnGuides` arrays remain empty (those drive the visual gold-composition
+preview, not gameplay). The collectable/platform **sprite** manifests keep `placementStatus:
+unassigned` (asset-library entries; the level places instances of them).
