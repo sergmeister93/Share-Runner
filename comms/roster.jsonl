@@ -1,2 +1,5 @@
 {"_schema":"roster-entry/v1","_doc":"append one JSON object per agent at launch; see schemas/roster-entry.md"}
 {"id":"manager-claude","role":"manager","vendor":"claude-code","capabilities":["orchestration","review","merge","contract-review","code-review","qa-verification","asset-manifest-read"],"ts":"2026-06-21T15:00:00Z","msg":"Manager session for WO-00 reconciliation"}
+{"id":"ux-codex","vendor":"codex","role":"executor","capabilities":["node","git","typescript","phaser","browser-verify","asset-manifest-read","pixel-art-safe","frontend-design","game-ui","sprite-integration","code-review"],"joined":"2026-06-21T14:47:32Z","lane":"ux-frontend"}
+{"id":"backend-claude","vendor":"claude-code","role":"executor","capabilities":["node","git","phaser","typescript","game-logic","asset-manifest-read","browser-verify"],"joined":"2026-06-21T16:00:00Z","lane":"backend-engine"}
+{"id":"qa-agent","vendor":"claude-code","role":"executor","capabilities":["node","git","browser-verify","qa-verification","tests","validation"],"joined":"2026-06-21T16:30:00Z","lane":"qa-verification"}
