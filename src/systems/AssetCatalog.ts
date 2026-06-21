@@ -20,8 +20,22 @@ export type LoadInstruction =
       frameWidth: number;
       frameHeight: number;
       frameCount: number;
+      /** Animation playback metadata from the manifest (fps + loop). */
+      frameRate: number;
+      repeat: number;
     }
   | { kind: 'audio'; key: string; url: string; loop: boolean };
+
+/** Player frame/pivot/collision pulled straight from the sprite manifest (no hardcoding). */
+export interface PlayerMeta {
+  assetId: string;
+  frameWidth: number;
+  frameHeight: number;
+  /** Pivot normalized from top-left (feet anchor). */
+  pivot: { x: number; y: number };
+  /** Collision box within the frame, top-left origin. */
+  collision: { x: number; y: number; width: number; height: number };
+}
 
 /** Minimal slice of Phaser's loader so this module needs no Phaser import. */
 export interface PhaserLoaderLike {
@@ -55,11 +69,13 @@ function req<T>(value: T | undefined | null, key: string, source: string): T {
 export class AssetCatalog {
   readonly loadList: LoadInstruction[];
   readonly placements: AuthoredGameplayPlacements;
+  readonly playerMeta: PlayerMeta;
   private readonly byKey: Map<string, LoadInstruction>;
 
-  constructor(loadList: LoadInstruction[], placements: AuthoredGameplayPlacements) {
+  constructor(loadList: LoadInstruction[], placements: AuthoredGameplayPlacements, playerMeta: PlayerMeta) {
     this.loadList = loadList;
     this.placements = placements;
+    this.playerMeta = playerMeta;
     this.byKey = new Map(loadList.map((i) => [i.key, i]));
   }
 
@@ -125,6 +141,8 @@ export function buildAssetCatalog(bundle: ManifestBundle): AssetCatalog {
       frameWidth,
       frameHeight,
       frameCount: req(anim.frames, `animations.${name}.frames`, playerSrc),
+      frameRate: req(anim.fpsSuggested, `animations.${name}.fpsSuggested`, playerSrc),
+      repeat: anim.loop ? -1 : 0,
     });
   }
 
@@ -155,7 +173,23 @@ export function buildAssetCatalog(bundle: ManifestBundle): AssetCatalog {
   req(placements.environmentObstacles, 'authoredGameplayPlacements.environmentObstacles', levelSrc);
   req(placements.collectables, 'authoredGameplayPlacements.collectables', levelSrc);
 
-  return new AssetCatalog(loads, placements);
+  // Player frame/pivot/collision metadata — for spawn + body sizing, never hardcoded.
+  const pivot = req(bundle.player.pivot?.normalizedFromTopLeft, 'pivot.normalizedFromTopLeft', playerSrc);
+  const collision = req(bundle.player.collision, 'collision', playerSrc);
+  const playerMeta: PlayerMeta = {
+    assetId: bundle.player.assetId,
+    frameWidth,
+    frameHeight,
+    pivot: { x: req(pivot.x, 'pivot.x', playerSrc), y: req(pivot.y, 'pivot.y', playerSrc) },
+    collision: {
+      x: req(collision.x, 'collision.x', playerSrc),
+      y: req(collision.y, 'collision.y', playerSrc),
+      width: req(collision.width, 'collision.width', playerSrc),
+      height: req(collision.height, 'collision.height', playerSrc),
+    },
+  };
+
+  return new AssetCatalog(loads, placements, playerMeta);
 }
 
 /** Queue every catalog asset onto a Phaser scene loader. Called by the Preloader (WO-06). */

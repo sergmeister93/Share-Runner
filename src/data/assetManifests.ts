@@ -95,6 +95,8 @@ export interface PlayerAnimationEntry {
 export interface PlayerSpriteManifest {
   assetId: string;
   frame: { width: number; height: number };
+  pivot?: { normalizedFromTopLeft: { x: number; y: number } };
+  collision?: { x: number; y: number; width: number; height: number };
   animations: Record<string, PlayerAnimationEntry>;
 }
 
