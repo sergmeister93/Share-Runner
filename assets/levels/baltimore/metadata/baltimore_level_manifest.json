@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 2,
+  "levelId": "baltimore-waterfront",
+  "displayName": "Baltimore Waterfront",
+  "coordinateSystem": {
+    "origin": "top-left",
+    "xPositive": "right",
+    "yPositive": "down",
+    "units": "canonical composition pixels"
+  },
+  "compositionSpace": {
+    "width": 4400,
+    "height": 2494,
+    "aspectRatio": 1.7642357658,
+    "fitPolicy": "contain",
+    "uniformScaleFormula": "min(viewportWidth / 4400, viewportHeight / 2494)",
+    "pixelSnapping": true
+  },
+  "worldBounds": {
+    "x": 0,
+    "y": 0,
+    "width": 4400,
+    "height": 2494
+  },
+  "approvedRatios": {
+    "skylineWidthToCanvas": 1,
+    "skylineHeightToCanvas": 0.882116,
+    "rowhomeInstanceWidthToCanvas": 0.5,
+    "rowhomeHeightToCanvas": 0.236167,
+    "rooftopYToCanvas": 0.763833,
+    "heroVisualHeightToRowhomeHeight": 0.173175
+  },
+  "assets": {
+    "background": {
+      "key": "baltimore-skyline-wide",
+      "path": "../generated/baltimore_skyline_wide.png",
+      "width": 4400,
+      "height": 2200,
+      "alphaChannel": false,
+      "runtime": true
+    },
+    "rowhomes": {
+      "key": "baltimore-rowhome-platform-strip",
+      "path": "../generated/baltimore_rowhome_platform_strip.png",
+      "width": 2200,
+      "height": 589,
+      "alphaChannel": true,
+      "hasTransparency": false,
+      "runtime": true,
+      "origin": { "x": 0, "y": 0 }
+    },
+    "music": {
+      "key": "baltimore-rooftop-theme",
+      "path": "../../../audio/music/levels/baltimore/Retro Baltimore Rooftop Soundtrack.mp3",
+      "format": "mp3",
+      "runtime": true,
+      "loopSuggested": true
+    }
+  },
+  "composition": "composition.json",
+  "metadata": {
+    "collision": "collision_map.json",
+    "parallax": "parallax_layers.json"
+  },
+  "prefabLibraries": {
+    "player": "../../../sprites/characters/male_hero/trp_blue/manifest.json",
+    "collectables": "../../../sprites/collectables/manifest.json",
+    "environment": "../../../sprites/environments/manifest.json"
+  },
+  "authoredGameplayPlacements": {
+    "collectables": [],
+    "environmentObstacles": [],
+    "status": "intentionally-unassigned",
+    "note": "The scale-test preview is not placement data. Author these arrays later."
+  },
+  "previews": {
+    "goldComposition": {
+      "path": "../preview.png",
+      "width": 4400,
+      "height": 2494,
+      "authoritativeForComposition": true
+    },
+    "ingredientScaleTest": {
+      "path": "../generated/baltimore_level_gameplay_preview.png",
+      "width": 4400,
+      "height": 2494,
+      "authoritativeForPlacement": false
+    },
+    "backgroundReview": "../generated/baltimore_skyline_wide_preview.png",
+    "rowhomeReview": "../generated/baltimore_rowhome_platform_strip_preview.png"
+  },
+  "reference": "../reference/BaltimoreBackground.png"
+}

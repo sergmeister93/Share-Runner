@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 2,
+  "assetId": "male_hero_trp_blue",
+  "type": "horizontal-sprite-sheets",
+  "format": "rgba-png",
+  "facing": "right",
+  "frame": { "width": 160, "height": 160 },
+  "approvedScale": {
+    "idleVisualHeight": 102,
+    "rowhomeHeight": 589,
+    "visualHeightToRowhomeHeight": 0.173175,
+    "displayScale": 1
+  },
+  "pivot": {
+    "pixelsFromTopLeft": { "x": 80, "y": 150 },
+    "normalizedFromTopLeft": { "x": 0.5, "y": 0.9375 },
+    "normalizedFromBottomLeft": { "x": 0.5, "y": 0.0625 }
+  },
+  "collision": {
+    "shape": "rectangle",
+    "x": 58,
+    "y": 54,
+    "width": 44,
+    "height": 96,
+    "feetY": 150,
+    "fixedAcrossAnimations": true
+  },
+  "import": {
+    "filter": "nearest",
+    "compression": "lossless-or-disabled",
+    "mipmaps": false,
+    "wrap": "clamp",
+    "trimFrames": false
+  },
+  "animations": {
+    "idle": { "file": "animations/male_hero-idle.png", "frames": 10, "fpsSuggested": 8, "loop": true },
+    "walk": { "file": "animations/male_hero-walk.png", "frames": 10, "fpsSuggested": 10, "loop": true },
+    "run": { "file": "animations/male_hero-run.png", "frames": 10, "fpsSuggested": 14, "loop": true },
+    "jump": { "file": "animations/male_hero-jump.png", "frames": 6, "fpsSuggested": 12, "loop": false },
+    "fall": { "file": "animations/male_hero-fall.png", "frames": 4, "fpsSuggested": 10, "loop": false, "next": "fallLoop" },
+    "fallLoop": { "file": "animations/male_hero-fall-loop.png", "frames": 3, "fpsSuggested": 8, "loop": true }
+  },
+  "source": {
+    "directory": "source/animations",
+    "frameSize": { "width": 128, "height": 128 },
+    "runtime": false
+  },
+  "reference": { "file": "reference/male_hero-design.png", "runtimeAnimation": false }
+}

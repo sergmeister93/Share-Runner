@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 2,
+  "coordinateSpace": "canonical composition pixels",
+  "layers": [
+    {
+      "id": "baltimore-harbor-background",
+      "assetKey": "baltimore-skyline-wide",
+      "order": 0,
+      "depth": -100,
+      "placement": { "x": 0, "y": 0, "width": 4400, "height": 2200 },
+      "scrollFactor": { "x": 0.18, "y": 0.08 },
+      "origin": { "x": 0, "y": 0 },
+      "repeatX": false,
+      "pixelSnapping": true
+    },
+    {
+      "id": "baltimore-rowhomes",
+      "assetKey": "baltimore-rowhome-platform-strip",
+      "order": 1,
+      "depth": 10,
+      "scrollFactor": { "x": 1, "y": 1 },
+      "origin": { "x": 0, "y": 0 },
+      "instances": [
+        { "id": "rowhomes-west", "x": 0, "y": 1905, "width": 2200, "height": 589 },
+        { "id": "rowhomes-east", "x": 2200, "y": 1905, "width": 2200, "height": 589 }
+      ],
+      "repeatX": false,
+      "pixelSnapping": true
+    }
+  ]
+}

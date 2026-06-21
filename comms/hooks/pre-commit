@@ -1,0 +1,39 @@
+#!/bin/sh
+# comms protocol gate — vendor-neutral enforcement at commit time.
+# Fires for ANY committer (Claude, Codex, Cursor, human): runs the validator and
+# enforces "code and record land together" (KERNEL invariant 3).
+#
+# Installed by bin/bind.mjs. Escape hatch for the human: `git commit --no-verify`.
+
+ROOT="$(git rev-parse --show-toplevel)" || exit 0
+if   [ -d "$ROOT/comms" ];     then COMMS="$ROOT/comms"
+elif [ -d "$ROOT/comms_new" ]; then COMMS="$ROOT/comms_new"
+else exit 0
+fi
+
+# 1) The validator must pass.
+if command -v node >/dev/null 2>&1; then
+  if ! node "$COMMS/bin/validate.mjs"; then
+    echo "comms: validate.mjs failed — commit blocked. Fix the drift above (or --no-verify if you must)."
+    exit 1
+  fi
+else
+  echo "comms: node not found — skipping validate.mjs (install node for enforcement)."
+fi
+
+# 2) Code + record together: if non-doc source outside comms/ is staged, the ledger
+#    must be staged too. This makes "code shipped but the record lied" impossible.
+staged="$(git diff --cached --name-only)"
+source_staged="$(printf '%s\n' "$staged" | grep -vE '(^comms/|^comms_new/|\.md$)' | grep -v '^$')"
+if [ -n "$source_staged" ]; then
+  if ! printf '%s\n' "$staged" | grep -q 'ledger\.jsonl'; then
+    echo "comms: source files are staged without a comms/ledger.jsonl update."
+    echo "       The record must track reality (KERNEL invariant 3): add a result"
+    echo "       entry to the ledger in this commit, or use --no-verify if intentional."
+    echo "       staged source:"
+    printf '%s\n' "$source_staged" | sed 's/^/         - /'
+    exit 1
+  fi
+fi
+
+exit 0

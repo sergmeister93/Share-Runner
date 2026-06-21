@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "libraryId": "platformer-assets",
+  "canonicalCoordinateSpace": {
+    "level": "baltimore-waterfront",
+    "width": 4400,
+    "height": 2494,
+    "units": "composition pixels"
+  },
+  "packages": {
+    "baltimoreLevel": {
+      "manifest": "levels/baltimore/metadata/baltimore_level_manifest.json",
+      "goldPreview": "levels/baltimore/preview.png"
+    },
+    "maleHeroTrpBlue": {
+      "manifest": "sprites/characters/male_hero/trp_blue/manifest.json"
+    },
+    "collectables": {
+      "manifest": "sprites/collectables/manifest.json"
+    },
+    "environmentPrefabs": {
+      "manifest": "sprites/environments/manifest.json"
+    }
+  },
+  "audio": {
+    "baltimoreRooftopTheme": {
+      "file": "audio/music/levels/baltimore/Retro Baltimore Rooftop Soundtrack.mp3",
+      "format": "mp3",
+      "loopSuggested": true
+    }
+  },
+  "regeneration": {
+    "runtimeAssets": "../scripts/refresh-baltimore-assets.mjs",
+    "scalePreview": "../scripts/generate-baltimore-preview.mjs",
+    "validation": "../scripts/validate-baltimore-assets.mjs"
+  }
+}

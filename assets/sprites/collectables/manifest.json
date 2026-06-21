@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "libraryId": "collectables",
+  "coordinateSpace": "asset-local runtime pixels",
+  "assets": {
+    "share": {
+      "key": "share",
+      "file": "shares.png",
+      "width": 56,
+      "height": 55,
+      "alpha": true,
+      "origin": { "x": 0.5, "y": 0.5 },
+      "collision": {
+        "shape": "circle",
+        "centerX": 28,
+        "centerY": 27.5,
+        "radius": 22,
+        "sensor": true
+      },
+      "placementStatus": "unassigned"
+    }
+  },
+  "source": { "file": "source/shares_source.png", "runtime": false }
+}

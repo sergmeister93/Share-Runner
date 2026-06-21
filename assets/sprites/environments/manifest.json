@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "libraryId": "environment-prefabs",
+  "coordinateSpace": "asset-local runtime pixels",
+  "assets": {
+    "floatingBricks": {
+      "key": "floating-bricks",
+      "file": "platforms.png",
+      "width": 170,
+      "height": 58,
+      "alpha": true,
+      "origin": { "x": 0, "y": 0 },
+      "collision": {
+        "shape": "rectangle",
+        "x": 0,
+        "y": 0,
+        "width": 170,
+        "height": 12,
+        "surfaceY": 0,
+        "collisionType": "solid"
+      },
+      "placementStatus": "unassigned"
+    }
+  },
+  "source": { "file": "source/platforms_source.png", "runtime": false }
+}

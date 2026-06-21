@@ -1,0 +1,17 @@
+{
+  "name": "share-runner",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Share-Runner — retro pixel-art Baltimore platformer. Setup phase; no runtime code yet.",
+  "type": "module",
+  "scripts": {
+    "comms:validate": "node comms/bin/validate.mjs",
+    "assets:validate": "node scripts/validate-baltimore-assets.mjs",
+    "assets:preview": "node scripts/generate-baltimore-preview.mjs",
+    "assets:refresh": "node scripts/refresh-baltimore-assets.mjs",
+    "setup:validate": "node scripts/validate-project-setup.mjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.0"
+  }
+}
