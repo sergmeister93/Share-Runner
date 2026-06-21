@@ -7,3 +7,7 @@ Thumbs.db
 .env.*
 dist/
 .cache/
+
+# Playwright MCP + manual smoke artifacts
+.playwright-mcp/
+smoke-*.jpeg
