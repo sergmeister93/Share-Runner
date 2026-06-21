@@ -20,6 +20,8 @@ export class ManifestMismatchError extends Error {
 export interface AssetLibraryManifest {
   packages: Record<string, { manifest: string; goldPreview?: string }>;
   audio?: Record<string, { file: string; format: string; loopSuggested?: boolean }>;
+  /** One-shot gameplay SFX, keyed by Phaser asset key. Paths are asset-root-relative. */
+  sfx?: Record<string, { file: string; format: string }>;
 }
 
 export interface ImageAssetEntry {

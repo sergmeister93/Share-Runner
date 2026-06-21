@@ -141,6 +141,17 @@ export function buildAssetCatalog(bundle: ManifestBundle): AssetCatalog {
     loop: music.loopSuggested === true,
   });
 
+  // --- One-shot SFX (library-relative paths; never looped) -----------------------
+  const librarySrc = 'asset_library_manifest.json';
+  for (const [key, entry] of Object.entries(bundle.library.sfx ?? {})) {
+    loads.push({
+      kind: 'audio',
+      key,
+      url: url('', req(entry.file, `sfx.${key}.file`, librarySrc)),
+      loop: false,
+    });
+  }
+
   // --- Player animation spritesheets (frame size from the player manifest) -------
   const playerDir = dirOf(bundle.paths.player);
   const playerSrc = 'male_hero/trp_blue/manifest.json';

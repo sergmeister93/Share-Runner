@@ -19,6 +19,7 @@
     "assets:validate": "node scripts/validate-baltimore-assets.mjs",
     "assets:preview": "node scripts/generate-baltimore-preview.mjs",
     "assets:refresh": "node scripts/refresh-baltimore-assets.mjs",
+    "assets:sfx": "node scripts/generate-sfx.mjs",
     "setup:validate": "node scripts/validate-project-setup.mjs"
   },
   "dependencies": {

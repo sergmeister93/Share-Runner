@@ -12,6 +12,7 @@ const MIME: Record<string, string> = {
   '.json': 'application/json',
   '.png': 'image/png',
   '.mp3': 'audio/mpeg',
+  '.wav': 'audio/wav',
 };
 
 function serveAssets(): Plugin {
