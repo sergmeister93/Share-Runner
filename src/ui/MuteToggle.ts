@@ -65,6 +65,12 @@ export class MuteToggle {
     this.root.destroy(true);
   }
 
+  /** The display + input objects the LevelScene routes to the UI camera, so the
+   * world camera's zoom/scroll never displaces the toggle (frame + hit-zone). */
+  get cameraObjects(): Phaser.GameObjects.GameObject[] {
+    return [this.root, this.hitZone];
+  }
+
   private onPointerToggle(): void {
     this.audio.toggleMuted('ui');
   }

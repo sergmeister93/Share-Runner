@@ -25,6 +25,9 @@ import { HUD } from '../ui/HUD';
 const BG_SKYLINE_KEY = 'baltimore-skyline-wide';
 const BG_ROWHOMES_KEY = 'baltimore-rowhome-platform-strip';
 const ROWHOME_TOP_Y = 1905;
+// World-camera zoom for a readable side-scroll. ponytail: a literal here; promote to
+// Constants if a second level ever needs a different value.
+const LEVEL_CAMERA_ZOOM = 2.5;
 const ROWHOME_HALF_WIDTH = 2200; // two strips meet at x=2200 (composition.json)
 
 /**
@@ -69,17 +72,23 @@ export class LevelScene extends Phaser.Scene {
     this.completion.registerOverlap(this.player);
 
     this.audio = new AudioController(this, catalog);
-    createMuteToggle(this, this.audio);
-    new HUD(this);
+    const mute = createMuteToggle(this, this.audio);
+    const hud = new HUD(this);
 
+    // World camera: zoom in + follow so the player is readable (WO-18 QA: ~23px wide
+    // at whole-world contain-fit). Bounds (=world) clamp it to the level edges.
     const camera = new CameraSystem(this);
     camera.contain();
     camera.follow(this.player);
-    // WO-18 QA: at whole-world contain-fit the player is ~23px wide (barely playable).
-    // Zoom in and let the camera follow for a readable side-scroll. Bounds (=world) keep
-    // it from showing past the edges. ponytail: a literal here; promote to Constants if
-    // we ever add a second level.
-    this.cameras.main.setZoom(2.5);
+    this.cameras.main.setZoom(LEVEL_CAMERA_ZOOM);
+
+    // UI camera: HUD + mute toggle must NOT move with the world camera's zoom/scroll
+    // (setScrollFactor(0) ignores scroll but NOT zoom — caught in a ux live audit). Give
+    // the overlays their own unzoomed camera; each camera ignores the other's objects.
+    const uiObjects = [hud.root, hud.flashRoot, ...mute.cameraObjects];
+    const uiCamera = this.cameras.add(0, 0, this.scale.width, this.scale.height);
+    this.cameras.main.ignore(uiObjects);
+    uiCamera.ignore(this.children.list.filter((o) => !uiObjects.includes(o)));
 
     gameState.currentScene = SCENE_LEVEL;
     gameState.isRunActive = true;
